@@ -105,14 +105,14 @@ void AuthWindow::setupRegisterPage() {
     m_regError->setStyleSheet("color: red;");
     m_regError->setVisible(false);
     
-    QFormLayout* form = new QFormLayout;
-    form->addRow("Имя:", m_regName);
-    form->addRow("Email:", m_regEmail);
-    form->addRow("Пароль:", m_regPassword);
-    form->addRow("Роль:", m_regRole);
-    form->addRow("Специализация:", m_regSpecialization);
-    form->addRow("Образование:", m_regEducation);
-    form->addRow("Описание:", m_regDescription);
+    m_regForm = new QFormLayout;
+    m_regForm->addRow("Имя:", m_regName);
+    m_regForm->addRow("Email:", m_regEmail);
+    m_regForm->addRow("Пароль:", m_regPassword);
+    m_regForm->addRow("Роль:", m_regRole);
+    m_regForm->addRow("Специализация:", m_regSpecialization);
+    m_regForm->addRow("Образование:", m_regEducation);
+    m_regForm->addRow("Описание:", m_regDescription);
     
     QVBoxLayout* layout = new QVBoxLayout(page);
     layout->setContentsMargins(40, 40, 40, 40);
@@ -120,7 +120,7 @@ void AuthWindow::setupRegisterPage() {
     
     layout->addWidget(title);
     layout->addSpacing(10);
-    layout->addLayout(form);
+    layout->addLayout(m_regForm);
     layout->addSpacing(10);
     layout->addWidget(m_registerButton);
     layout->addWidget(m_regError);
@@ -139,9 +139,9 @@ void AuthWindow::setupRegisterPage() {
 
 void AuthWindow::onRoleChanged(int index) {
     bool isPsychologist = (index == 1);
-    m_regSpecialization->setVisible(isPsychologist);
-    m_regEducation->setVisible(isPsychologist);
-    m_regDescription->setVisible(isPsychologist);
+    m_regForm->setRowVisible(m_regSpecialization, isPsychologist);
+    m_regForm->setRowVisible(m_regEducation, isPsychologist);
+    m_regForm->setRowVisible(m_regDescription, isPsychologist);
 }
 
 void AuthWindow::switchToLogin() {

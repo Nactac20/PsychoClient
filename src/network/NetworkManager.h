@@ -3,6 +3,7 @@
 #include <QTcpSocket>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QThread>
 #include <functional>
 #include <queue>
 
@@ -24,9 +25,10 @@ signals:
     void error(const QString& message);
     
 private:
-    NetworkManager() = default;
+    NetworkManager();
     ~NetworkManager();
     
+    QThread* m_networkThread;
     QTcpSocket* m_socket = nullptr;
     QByteArray m_buffer;
     
@@ -38,4 +40,6 @@ private:
     
     void processData();
     static QByteArray generateRequestId();
+    
+    void initInThread();
 };

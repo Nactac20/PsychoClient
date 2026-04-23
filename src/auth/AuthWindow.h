@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QTextEdit>
 
+#include <QFormLayout>
+
 class AuthWindow : public QWidget {
     Q_OBJECT
 public:
@@ -47,4 +49,5 @@ private:
     QPushButton* m_registerButton;
     QPushButton* m_toLoginButton;
     QLabel* m_regError;
+    QFormLayout* m_regForm;
 };
